@@ -22,7 +22,7 @@ from constants import *
 
 #create web3 object
 w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
-#w3.eth.setGasPriceStrategy(medium_gas_price_strategy)
+w3.eth.setGasPriceStrategy(medium_gas_price_strategy)
 
 # Create a function called `derive_wallets`
 def derive_wallets(coin=BTC, mnemonic=mnemonic, depth=3):
@@ -62,7 +62,7 @@ def create_tx(coin, account, to, amount):
             "chainId": w3.eth.chain_id
     }
     elif coin == BTCTEST:
-        return bit.PrivateKeyTestnet.prepare_transaction(account.address, [(to,value,BTC)])
+        return bit.PrivateKeyTestnet.prepare_transaction(account.address, [(to,amount,BTC)])
     else:
         print('Error: Invalid coin selection. Please use ETH or BTCTEST')
 # Create a function called `send_tx` that calls `create_tx`, signs and sends the transaction.
